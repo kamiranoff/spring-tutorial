@@ -1,8 +1,8 @@
 package com.nemeantalestudios.spring5webapp.bootstrap;
 
-import com.nemeantalestudios.spring5webapp.model.Author;
-import com.nemeantalestudios.spring5webapp.model.Book;
-import com.nemeantalestudios.spring5webapp.model.Publisher;
+import com.nemeantalestudios.spring5webapp.models.Author;
+import com.nemeantalestudios.spring5webapp.models.Book;
+import com.nemeantalestudios.spring5webapp.models.Publisher;
 import com.nemeantalestudios.spring5webapp.repositories.AuthorRepository;
 import com.nemeantalestudios.spring5webapp.repositories.BookRepository;
 import com.nemeantalestudios.spring5webapp.repositories.PublisherRepository;

@@ -1,4 +1,4 @@
-package com.nemeantalestudios.spring5webapp.model;
+package com.nemeantalestudios.spring5webapp.models;
 
 import javax.persistence.*;
 import java.util.HashSet;

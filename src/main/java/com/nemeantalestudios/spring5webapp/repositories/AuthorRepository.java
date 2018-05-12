@@ -1,6 +1,6 @@
 package com.nemeantalestudios.spring5webapp.repositories;
 
-import com.nemeantalestudios.spring5webapp.model.Author;
+import com.nemeantalestudios.spring5webapp.models.Author;
 import org.springframework.data.repository.CrudRepository;
 
 /**
