@@ -1,5 +1,6 @@
 package com.nemeantalestudios.didemo.controllers;
 
+import com.nemeantalestudios.didemo.services.GreetingService;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -9,9 +10,15 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class MyController {
 
+
+    private GreetingService greetingService;
+
+    public MyController(GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
+
     public String hello() {
-        System.out.println("Hello");
-        return "Hello";
+        return greetingService.sayGreeting();
     }
 
 }
