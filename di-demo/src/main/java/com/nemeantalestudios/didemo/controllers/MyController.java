@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 public class MyController {
 
     public String hello() {
-        System.out.print("Hello\n");
+        System.out.println("Hello");
         return "Hello";
     }
 
