@@ -33,61 +33,28 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         recipeRepository.saveAll(getRecipes());
     }
 
+    private Category getCategoryOrThrowException(String description) {
+        return categoryRepository.findByDescription(description)
+                .orElseThrow(() -> new RuntimeException("Expected Category Not Found"));
+    }
+
+    private UnitOfMeasure getUnitOfMeasureOrThrowException(String description) {
+        return unitOfMeasureRepository.findByDescription(description)
+                .orElseThrow(() -> new RuntimeException("Expected UOM Not Found"));
+    }
+
+
     private List<Recipe> getRecipes() {
 
         List<Recipe> recipes = new ArrayList<>(1);
 
-        Optional<UnitOfMeasure> teaspoonOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
+        UnitOfMeasure teaspoon = getUnitOfMeasureOrThrowException("Teaspoon");
+        UnitOfMeasure tablespoon = getUnitOfMeasureOrThrowException("Tablespoon");
+        UnitOfMeasure dash = getUnitOfMeasureOrThrowException("Dash");
+        UnitOfMeasure each = getUnitOfMeasureOrThrowException("Each");
 
-        if (!teaspoonOptional.isPresent()) {
-            throw new RuntimeException("Unit not found");
-        }
-
-        Optional<UnitOfMeasure> tableSpoonOptional = unitOfMeasureRepository.findByDescription("Tablespoon");
-
-        if (!tableSpoonOptional.isPresent()) {
-            throw new RuntimeException("Unit not found");
-        }
-
-        Optional<UnitOfMeasure> dashOptional = unitOfMeasureRepository.findByDescription("Dash");
-
-        if (!dashOptional.isPresent()) {
-            throw new RuntimeException("Unit not found");
-        }
-
-        Optional<UnitOfMeasure> cupOptional = unitOfMeasureRepository.findByDescription("Cup");
-
-        if (!cupOptional.isPresent()) {
-            throw new RuntimeException("Unit not found");
-        }
-
-        Optional<UnitOfMeasure> eachOptional = unitOfMeasureRepository.findByDescription("Each");
-
-        if (!eachOptional.isPresent()) {
-            throw new RuntimeException("Unit not found");
-        }
-
-
-        UnitOfMeasure teaspoon = teaspoonOptional.get();
-        UnitOfMeasure tablespoon = tableSpoonOptional.get();
-        UnitOfMeasure cup = cupOptional .get();
-        UnitOfMeasure dash = dashOptional.get();
-        UnitOfMeasure each = eachOptional.get();
-
-        Optional<Category> mexicanOptional = categoryRepository.findByDescription("Mexican");
-
-        if (!mexicanOptional.isPresent()) {
-            throw new RuntimeException("Category not found");
-        }
-
-        Optional<Category> americanOptional = categoryRepository.findByDescription("American");
-
-        if (!americanOptional.isPresent()) {
-            throw new RuntimeException("Category not found");
-        }
-
-        Category mexican = mexicanOptional.get();
-        Category american = americanOptional.get();
+        Category mexican = getCategoryOrThrowException("Mexican");
+        Category american = getCategoryOrThrowException("American");
 
 
         Set<Category> guacamoleCategories = new HashSet<>();

@@ -1,11 +1,9 @@
 package com.nemeantalestudios.recipe.services;
 
+import com.google.common.collect.ImmutableSet;
 import com.nemeantalestudios.recipe.models.Recipe;
 import com.nemeantalestudios.recipe.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,10 +19,17 @@ public class RecipeServiceImpl implements RecipeService {
         this.recipeRepository = recipeRepository;
     }
 
+//    @Override
+//    public Set<Recipe> getRecipes() {
+//        Set<Recipe> recipeSet = new HashSet<>();
+//        recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
+//        return recipeSet;
+//    }
+
+
+    // Using guava
     @Override
     public Set<Recipe> getRecipes() {
-        Set<Recipe> recipeSet = new HashSet<>();
-        recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
-        return recipeSet;
+        return ImmutableSet.copyOf(recipeRepository.findAll());
     }
 }
