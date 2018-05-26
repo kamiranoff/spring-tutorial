@@ -26,4 +26,8 @@ public class Notes {
         this.recipe = recipe;
         this.recipeNotes = recipeNotes;
     }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
 }

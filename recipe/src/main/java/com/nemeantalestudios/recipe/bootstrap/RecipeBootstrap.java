@@ -61,7 +61,6 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacamoleCategories.add(mexican);
         guacamoleCategories.add(american);
 
-
         Recipe guacamoleRecipe = new Recipe();
 
         guacamoleRecipe.setCategories(guacamoleCategories);
@@ -100,14 +99,14 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Ingredient cilantro = new Ingredient(" cilantro (leaves and tender stems), finely chopped", new BigDecimal(2), tablespoon, guacamoleRecipe);
         Ingredient blackPepper = new Ingredient("freshly grated black pepper", new BigDecimal(1), dash, guacamoleRecipe);
         Ingredient tomato = new Ingredient("tomato, seeds and pulp removed, chopped", new BigDecimal(0.5), each, guacamoleRecipe);
-        guacamoleRecipe.getIngredients().add(avocado);
-        guacamoleRecipe.getIngredients().add(kosherSalt);
-        guacamoleRecipe.getIngredients().add(freshLimeJuice);
-        guacamoleRecipe.getIngredients().add(redOnion);
-        guacamoleRecipe.getIngredients().add(serranoChile);
-        guacamoleRecipe.getIngredients().add(cilantro);
-        guacamoleRecipe.getIngredients().add(blackPepper);
-        guacamoleRecipe.getIngredients().add(tomato);
+        guacamoleRecipe.addIngredient(avocado);
+        guacamoleRecipe.addIngredient(kosherSalt);
+        guacamoleRecipe.addIngredient(freshLimeJuice);
+        guacamoleRecipe.addIngredient(redOnion);
+        guacamoleRecipe.addIngredient(serranoChile);
+        guacamoleRecipe.addIngredient(cilantro);
+        guacamoleRecipe.addIngredient(blackPepper);
+        guacamoleRecipe.addIngredient(tomato);
 
         recipes.add(guacamoleRecipe);
         return recipes;
