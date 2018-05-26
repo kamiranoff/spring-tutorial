@@ -1,5 +1,6 @@
 package com.nemeantalestudios.recipe;
 
+import com.nemeantalestudios.recipe.repositories.RecipeRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,5 +9,7 @@ public class RecipeApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RecipeApplication.class, args);
+
     }
+
 }

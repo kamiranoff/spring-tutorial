@@ -12,7 +12,6 @@ import javax.persistence.Id;
 @Entity
 public class UnitOfMeasure {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,5 +20,12 @@ public class UnitOfMeasure {
 
     public Long getId() {
         return id;
+    }
+
+    public UnitOfMeasure(String description) {
+        this.description = description;
+    }
+
+    public UnitOfMeasure() {
     }
 }
