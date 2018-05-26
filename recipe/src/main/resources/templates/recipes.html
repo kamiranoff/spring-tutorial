@@ -18,6 +18,8 @@
     <tr th:each="recipe: ${recipes}">
         <td th:text="${recipe.id}"></td>
         <td th:text="${recipe.description}"></td>
+        <td th:text="${recipe.prepTime}"></td>
+        <td th:text="${recipe.difficulty}"></td>
         <td></td>
     </tr>
 </table>

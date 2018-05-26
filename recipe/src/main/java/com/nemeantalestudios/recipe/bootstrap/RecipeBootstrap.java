@@ -4,7 +4,7 @@ import com.nemeantalestudios.recipe.models.*;
 import com.nemeantalestudios.recipe.repositories.CategoryRepository;
 import com.nemeantalestudios.recipe.repositories.RecipeRepository;
 import com.nemeantalestudios.recipe.repositories.UnitOfMeasureRepository;
-import org.springframework.beans.factory.InitializingBean;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -15,6 +15,7 @@ import java.util.*;
 /**
  * @author kevin.amiranoff on 26/05/2018
  */
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -109,6 +110,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacamoleRecipe.addIngredient(tomato);
 
         recipes.add(guacamoleRecipe);
+
+        log.debug("Returning Recipes",recipes);
+
         return recipes;
 
     }
