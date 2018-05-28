@@ -6,22 +6,41 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Recipes</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.css}"/>
 </head>
 <body>
-<h1>My Recipes!</h1>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Description</th>
-    </tr>
-    <tr th:each="recipe: ${recipes}">
-        <td th:text="${recipe.id}"></td>
-        <td th:text="${recipe.description}"></td>
-        <td th:text="${recipe.prepTime}"></td>
-        <td th:text="${recipe.difficulty}"></td>
-        <td></td>
-    </tr>
-</table>
+<div class="container-fluid">
+
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="header-panel" style="background-color: rgba(59,98,148,0.59)">My Recipes!</h1>
+            </div>
+
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr th:each="recipe: ${recipes}">
+                            <td th:text="${recipe.id}"></td>
+                            <td th:text="${recipe.description}"></td>
+                            <td th:text="${recipe.prepTime}"></td>
+                            <td th:text="${recipe.difficulty}"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="application/javascript" th:src="@{/webjars/jquery/3.3.1-1/jquery.js}"></script>
+<script type="application/javascript" th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.js}"></script>
+
 </body>
 </html>
