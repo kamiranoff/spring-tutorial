@@ -5,6 +5,8 @@ import com.nemeantalestudios.recipe.models.Recipe;
 import com.nemeantalestudios.recipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -21,18 +23,22 @@ public class RecipeServiceImpl implements RecipeService {
         this.recipeRepository = recipeRepository;
     }
 
-//    @Override
-//    public Set<Recipe> getRecipes() {
-//        Set<Recipe> recipeSet = new HashSet<>();
-//        recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
-//        return recipeSet;
-//    }
 
-
-    // Using guava
     @Override
     public Set<Recipe> getRecipes() {
         log.debug("Getting Recipes");
         return ImmutableSet.copyOf(recipeRepository.findAll());
+    }
+
+    @Override
+    public Recipe findById(Long id) {
+
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+
+        if(!recipeOptional.isPresent()) {
+            throw new RuntimeException("Could not find recipe by id");
+        }
+
+        return recipeOptional.get();
     }
 }
