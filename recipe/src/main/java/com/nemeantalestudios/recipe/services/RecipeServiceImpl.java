@@ -1,10 +1,13 @@
 package com.nemeantalestudios.recipe.services;
 
 import com.google.common.collect.ImmutableSet;
+import com.nemeantalestudios.recipe.commands.RecipeCommand;
+import com.nemeantalestudios.recipe.converters.RecipeCommandToRecipe;
 import com.nemeantalestudios.recipe.models.Recipe;
 import com.nemeantalestudios.recipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.Set;
@@ -18,6 +21,8 @@ import java.util.Set;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
+    //  private final RecipeCommandToRecipe recipeCommandToRecipe;
+    //  private final RecipeToRecipeCommand recipeToRecipeCommand;
 
     public RecipeServiceImpl(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
@@ -35,10 +40,20 @@ public class RecipeServiceImpl implements RecipeService {
 
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 
-        if(!recipeOptional.isPresent()) {
+        if (!recipeOptional.isPresent()) {
             throw new RuntimeException("Could not find recipe by id");
         }
 
         return recipeOptional.get();
     }
+
+//    @Override
+//    @Transactional
+//    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
+//        Recipe detachedRecipe = recipeCommandToRecipe.convert(recipeCommand);
+//
+//        Recipe savedRecipe = recipeRepository.save(detachedRecipe);
+//        log.debug("Saved RecipeId: " + savedRecipe.getId());
+//        return recipeToRecipeCommand.convert(savedRecipe);
+//    }
 }

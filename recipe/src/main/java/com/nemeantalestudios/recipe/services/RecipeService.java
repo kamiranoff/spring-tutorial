@@ -1,5 +1,6 @@
 package com.nemeantalestudios.recipe.services;
 
+import com.nemeantalestudios.recipe.commands.RecipeCommand;
 import com.nemeantalestudios.recipe.models.Recipe;
 
 import java.util.Set;
@@ -11,4 +12,6 @@ public interface RecipeService {
     Set<Recipe> getRecipes();
 
     Recipe findById(Long id);
+
+   // RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand);
 }
