@@ -1,11 +1,12 @@
 package com.nemeantalestudios.recipe.controllers;
 
+import com.nemeantalestudios.recipe.commands.RecipeCommand;
+import com.nemeantalestudios.recipe.models.Recipe;
 import com.nemeantalestudios.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author kevin.amiranoff on 26/05/2018
@@ -33,5 +34,18 @@ public class RecipeController {
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
 
         return "recipe/show";
+    }
+
+    @RequestMapping("/recipe/add")
+    public String addRecipe(Model model) {
+        model.addAttribute("command", new RecipeCommand());
+        return "recipe/recipeForm";
+    }
+
+    @PostMapping
+    @RequestMapping("recipe")
+    public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
+        RecipeCommand savedCommand = recipeService.saveCommand(command);
+        return "redirect:/recipe/show/" + savedCommand.getId();
     }
 }

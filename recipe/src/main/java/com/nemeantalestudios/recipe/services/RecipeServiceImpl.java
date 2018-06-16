@@ -3,6 +3,7 @@ package com.nemeantalestudios.recipe.services;
 import com.google.common.collect.ImmutableSet;
 import com.nemeantalestudios.recipe.commands.RecipeCommand;
 import com.nemeantalestudios.recipe.converters.RecipeCommandToRecipe;
+import com.nemeantalestudios.recipe.converters.RecipeToRecipeCommand;
 import com.nemeantalestudios.recipe.models.Recipe;
 import com.nemeantalestudios.recipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +22,17 @@ import java.util.Set;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
-    //  private final RecipeCommandToRecipe recipeCommandToRecipe;
-    //  private final RecipeToRecipeCommand recipeToRecipeCommand;
+    private final RecipeCommandToRecipe recipeCommandToRecipe;
+    private final RecipeToRecipeCommand recipeToRecipeCommand;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository) {
+
+    public RecipeServiceImpl(RecipeRepository recipeRepository,
+                             RecipeCommandToRecipe recipeCommandToRecipe,
+                             RecipeToRecipeCommand recipeToRecipeCommand) {
         this.recipeRepository = recipeRepository;
+        this.recipeCommandToRecipe = recipeCommandToRecipe;
+        this.recipeToRecipeCommand = recipeToRecipeCommand;
     }
-
 
     @Override
     public Set<Recipe> getRecipes() {
@@ -47,13 +52,16 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeOptional.get();
     }
 
-//    @Override
-//    @Transactional
-//    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
-//        Recipe detachedRecipe = recipeCommandToRecipe.convert(recipeCommand);
-//
-//        Recipe savedRecipe = recipeRepository.save(detachedRecipe);
-//        log.debug("Saved RecipeId: " + savedRecipe.getId());
-//        return recipeToRecipeCommand.convert(savedRecipe);
-//    }
+    @Override
+    @Transactional
+    public RecipeCommand saveCommand(RecipeCommand recipeCommand) {
+        Recipe detachedRecipe = recipeCommandToRecipe.convert(recipeCommand);
+
+        Recipe savedRecipe = recipeRepository.save(detachedRecipe);
+        log.debug("Saved RecipeId: " + savedRecipe.getId());
+
+        RecipeCommand reconvertedRecipeCommand = recipeToRecipeCommand.convert(savedRecipe);
+        return reconvertedRecipeCommand;
+    }
+
 }

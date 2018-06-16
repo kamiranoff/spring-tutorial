@@ -1,5 +1,7 @@
 package com.nemeantalestudios.recipe.services;
 
+import com.nemeantalestudios.recipe.converters.RecipeCommandToRecipe;
+import com.nemeantalestudios.recipe.converters.RecipeToRecipeCommand;
 import com.nemeantalestudios.recipe.models.Recipe;
 import com.nemeantalestudios.recipe.repositories.RecipeRepository;
 import org.junit.Before;
@@ -25,10 +27,16 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
 
@@ -58,8 +66,8 @@ public class RecipeServiceImplTest {
 
         Set<Recipe> recipeSet = recipeService.getRecipes();
 
-        assertEquals( 1, recipeSet.size());
-        assertNotEquals( 2,recipeSet.size());
+        assertEquals(1, recipeSet.size());
+        assertNotEquals(2, recipeSet.size());
 
         verify(recipeRepository, times(1)).findAll();
     }
