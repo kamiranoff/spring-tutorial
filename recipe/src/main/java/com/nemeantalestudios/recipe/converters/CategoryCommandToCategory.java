@@ -2,7 +2,9 @@ package com.nemeantalestudios.recipe.converters;
 
 import com.nemeantalestudios.recipe.commands.CategoryCommand;
 import com.nemeantalestudios.recipe.models.Category;
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,6 +13,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CategoryCommandToCategory implements Converter<CategoryCommand, Category> {
+
+    @Synchronized
+    @Nullable
     @Override
     public Category convert(CategoryCommand categoryCommand) {
 
