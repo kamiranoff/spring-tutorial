@@ -1,7 +1,6 @@
 package com.nemeantalestudios.recipe.controllers;
 
 import com.nemeantalestudios.recipe.commands.RecipeCommand;
-import com.nemeantalestudios.recipe.models.Recipe;
 import com.nemeantalestudios.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -29,11 +28,18 @@ public class RecipeController {
         return "recipes";
     }
 
-    @RequestMapping("/recipe/show/{id}")
+    @RequestMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model) {
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
 
         return "recipe/show";
+    }
+
+
+    @RequestMapping("/recipe/{id}/update")
+    public String updateRecipe(@PathVariable String id, Model model) {
+        model.addAttribute("command", recipeService.findById(Long.valueOf(id)));
+        return "recipe/recipeForm";
     }
 
     @RequestMapping("/recipe/add")
@@ -46,6 +52,6 @@ public class RecipeController {
     @RequestMapping("recipe")
     public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
         RecipeCommand savedCommand = recipeService.saveCommand(command);
-        return "redirect:/recipe/show/" + savedCommand.getId();
+        return "redirect:/recipe/" + savedCommand.getId() + "/show";
     }
 }

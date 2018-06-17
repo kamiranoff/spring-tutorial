@@ -36,15 +36,12 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Set<Recipe> getRecipes() {
-        log.debug("Getting Recipes");
         return ImmutableSet.copyOf(recipeRepository.findAll());
     }
 
     @Override
     public Recipe findById(Long id) {
-
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
-
         if (!recipeOptional.isPresent()) {
             throw new RuntimeException("Could not find recipe by id");
         }
@@ -58,10 +55,13 @@ public class RecipeServiceImpl implements RecipeService {
         Recipe detachedRecipe = recipeCommandToRecipe.convert(recipeCommand);
 
         Recipe savedRecipe = recipeRepository.save(detachedRecipe);
-        log.debug("Saved RecipeId: " + savedRecipe.getId());
 
-        RecipeCommand reconvertedRecipeCommand = recipeToRecipeCommand.convert(savedRecipe);
-        return reconvertedRecipeCommand;
+        return recipeToRecipeCommand.convert(savedRecipe);
     }
 
+    @Override
+    @Transactional
+    public RecipeCommand findCommandById(Long id) {
+        return recipeToRecipeCommand.convert(findById(id));
+    }
 }

@@ -31,7 +31,10 @@
                             <td th:text="${recipe.prepTime}"></td>
                             <td th:text="${recipe.difficulty}"></td>
                             <td>
-                                <a th:href="@{'/recipe/show/' + ${recipe.id}}">View</a>
+                                <a th:href="@{'/recipe/'+${recipe.id}+'/show'}">View</a>
+                            </td>
+                            <td>
+                                <a th:href="@{'/recipe/'+${recipe.id}+'/update'}">Update</a>
                             </td>
                             <td></td>
                         </tr>

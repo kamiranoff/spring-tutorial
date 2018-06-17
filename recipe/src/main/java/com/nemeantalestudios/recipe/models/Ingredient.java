@@ -36,16 +36,20 @@ public class Ingredient {
         this.unitOfMeasure = unitOfMeasure;
     }
 
-    public Ingredient(String description, BigDecimal amount) {
-        this.description = description;
-        this.amount = amount;
-    }
-
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure, Recipe recipe) {
         this.description = description;
         this.amount = amount;
         this.unitOfMeasure = unitOfMeasure;
         this.recipe = recipe;
+    }
+
+
+    public UnitOfMeasure getUnitOfMeasure() {
+        return unitOfMeasure;
+    }
+
+    public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
+        this.unitOfMeasure = unitOfMeasure;
     }
 
 }
