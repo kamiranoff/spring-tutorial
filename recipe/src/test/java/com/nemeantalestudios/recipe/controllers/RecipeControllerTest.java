@@ -2,6 +2,7 @@ package com.nemeantalestudios.recipe.controllers;
 
 import com.nemeantalestudios.recipe.commands.RecipeCommand;
 import com.nemeantalestudios.recipe.models.Recipe;
+import com.nemeantalestudios.recipe.repositories.RecipeRepository;
 import com.nemeantalestudios.recipe.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import java.util.HashSet;
@@ -33,6 +35,10 @@ public class RecipeControllerTest {
 
     @Mock
     RecipeService recipeService;
+
+
+    @Mock
+    RecipeRepository recipeRepository;
 
     @Mock
     Model model;
@@ -134,6 +140,15 @@ public class RecipeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/recipeForm"))
                 .andExpect(model().attributeExists("command"));
+    }
+
+    @Test
+    public void testDeleteRecipe() throws Exception {
+        Long idToDelete = Long.valueOf(2L);
+        recipeService.deleteById(idToDelete);
+
+        verify(recipeRepository, times(1)).deleteById(anyLong());
+
     }
 
 }

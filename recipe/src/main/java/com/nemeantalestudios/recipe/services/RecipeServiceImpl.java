@@ -50,6 +50,17 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public Recipe deleteById(Long id) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+        if (!recipeOptional.isPresent()) {
+            throw new RuntimeException("Could not find recipe by id");
+        }
+        recipeRepository.deleteById(recipeOptional.get().getId());
+
+        return recipeOptional.get();
+    }
+
+    @Override
     @Transactional
     public RecipeCommand saveCommand(RecipeCommand recipeCommand) {
         Recipe detachedRecipe = recipeCommandToRecipe.convert(recipeCommand);
