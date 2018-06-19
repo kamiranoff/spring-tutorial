@@ -51,13 +51,9 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe deleteById(Long id) {
-        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
-        if (!recipeOptional.isPresent()) {
-            throw new RuntimeException("Could not find recipe by id");
-        }
-        recipeRepository.deleteById(recipeOptional.get().getId());
+        recipeRepository.deleteById(Long.valueOf(id));
 
-        return recipeOptional.get();
+        return null;
     }
 
     @Override

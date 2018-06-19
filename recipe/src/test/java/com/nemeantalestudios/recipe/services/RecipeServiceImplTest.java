@@ -22,16 +22,16 @@ import static org.mockito.Mockito.*;
  */
 public class RecipeServiceImplTest {
 
-    RecipeServiceImpl recipeService;
+    private RecipeServiceImpl recipeService;
 
     @Mock
-    RecipeRepository recipeRepository;
+    private RecipeRepository recipeRepository;
 
     @Mock
-    RecipeToRecipeCommand recipeToRecipeCommand;
+    private RecipeToRecipeCommand recipeToRecipeCommand;
 
     @Mock
-    RecipeCommandToRecipe recipeCommandToRecipe;
+    private RecipeCommandToRecipe recipeCommandToRecipe;
 
     @Before
     public void setUp() throws Exception {
@@ -70,5 +70,12 @@ public class RecipeServiceImplTest {
         assertNotEquals(2, recipeSet.size());
 
         verify(recipeRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void testDeleteRecipeById() throws Exception {
+        Long idToDelete = 1L;
+        recipeService.deleteById(idToDelete);
+        verify(recipeRepository, times(1)).deleteById(anyLong());
     }
 }

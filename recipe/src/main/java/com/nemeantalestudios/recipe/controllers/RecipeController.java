@@ -1,6 +1,7 @@
 package com.nemeantalestudios.recipe.controllers;
 
 import com.nemeantalestudios.recipe.commands.RecipeCommand;
+import com.nemeantalestudios.recipe.models.Recipe;
 import com.nemeantalestudios.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -48,9 +49,15 @@ public class RecipeController {
     }
 
     @PostMapping
-    @RequestMapping("recipe")
+    @RequestMapping("/recipe")
     public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
         RecipeCommand savedCommand = recipeService.saveCommand(command);
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
+    }
+
+    @RequestMapping("/recipe/{id}/delete")
+    public String delete(@PathVariable String id) {
+        recipeService.deleteById(Long.valueOf(id));
+        return "redirect:/";
     }
 }

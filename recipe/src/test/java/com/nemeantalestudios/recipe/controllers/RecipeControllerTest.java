@@ -32,12 +32,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class RecipeControllerTest {
 
     @Mock
-    RecipeService recipeService;
-    @Mock
-    Model model;
+    private RecipeService recipeService;
 
-    RecipeController recipeController;
-    MockMvc mockMvc;
+    @Mock
+    private Model model;
+
+    private RecipeController recipeController;
+    private MockMvc mockMvc;
 
     @Before
     public void setUp() throws Exception {
@@ -135,13 +136,14 @@ public class RecipeControllerTest {
                 .andExpect(model().attributeExists("command"));
     }
 
+
     @Test
-    public void testDeleteRecipe() throws Exception {
-        Long idToDelete = Long.valueOf(2L);
-        recipeService.deleteById(idToDelete);
+    public void testDeletePage() throws Exception {
+        mockMvc.perform(get("/recipe/1/delete"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/"));
 
         verify(recipeService, times(1)).deleteById(anyLong());
-
     }
 
 }
